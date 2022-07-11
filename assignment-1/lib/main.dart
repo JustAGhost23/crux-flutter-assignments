@@ -33,9 +33,9 @@ class _MyHomePageState extends State<MyHomePage> {
       //Background and AppBar
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Colors.purple.shade400, Colors.orange.shade200]
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Colors.purple.shade400, Colors.orange.shade100]
         )
       ),
       child: Scaffold(
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               ),
               Container(
-                margin: const EdgeInsets.only(top: 20, left: 70, right: 70),
+                margin: const EdgeInsets.only(top: 30, left: 70, right: 70),
                 child: Row(
                   children: [
                     Container(
