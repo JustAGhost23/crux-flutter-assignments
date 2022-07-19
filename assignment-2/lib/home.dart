@@ -26,7 +26,10 @@ class _HomeState extends State<Home> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(title: const Text("Todo list")),
+      appBar: AppBar(
+        title: const Text("Todo list"),
+        automaticallyImplyLeading: false,
+      ),
       body: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
         height: height,
@@ -76,7 +79,8 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                     child: Material(
-                      color: list[index].completed ? Colors.green : Colors.white,
+                      color:
+                          list[index].completed ? Colors.green : Colors.white,
                       child: ListTile(
                         title: Text(list[index].title),
                         onTap: () {
