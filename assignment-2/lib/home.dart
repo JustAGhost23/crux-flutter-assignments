@@ -25,9 +25,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text("Todo list"),
         automaticallyImplyLeading: false,
@@ -71,6 +69,7 @@ class _HomeState extends State<Home> {
                           onPressed: (BuildContext context) {
                             setState(() {
                               TodoItem.complete(list[index]);
+                              modifyList();
                             });
                           },
                           backgroundColor: Colors.green,
@@ -120,7 +119,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-    ),);
+    );
   }
 
   void addTodoItems() async {
@@ -129,7 +128,7 @@ class _HomeState extends State<Home> {
     final String? item = prefs.getString('List');
     setState(() {
       List<TodoItem> todoList = TodoItem.fromJSON(item);
-      list = todoList.reversed.toList();
+      list = todoList.toList();
     });
   }
 

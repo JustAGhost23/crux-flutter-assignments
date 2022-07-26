@@ -4,19 +4,21 @@ class TodoItem {
   String title;
   String description;
   bool completed = false;
-  TodoItem({required this.title, required this.description});
+  TodoItem({required this.title, required this.description, this.completed = false});
 
   factory TodoItem.fromMap(Map<String, dynamic> jsonData) {
     return TodoItem(
       title: jsonData['title'] as String,
       description: jsonData['description'] as String,
+      completed: jsonData['completed'] as bool,
     );
   }
 
-  static Map<String, String> toMap(TodoItem item) {
+  static Map<String, dynamic> toMap(TodoItem item) {
     return {
       'title': item.title,
       'description': item.description,
+      'completed' : item.completed
     };
   }
 
@@ -31,7 +33,7 @@ class TodoItem {
 
   static String toJSON(List<TodoItem> item) {
     return jsonEncode(item
-        .map<Map<String, String>>((music) => TodoItem.toMap(music))
+        .map<Map<String, dynamic>>((music) => TodoItem.toMap(music))
         .toList());
   }
 

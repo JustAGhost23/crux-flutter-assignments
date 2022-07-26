@@ -53,6 +53,7 @@ class _AddItemState extends State<AddItem> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
+                onChanged: (_) => setState(() {}),
               ),
             ),
             Padding(
@@ -77,15 +78,18 @@ class _AddItemState extends State<AddItem> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () {
-                  addItem();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Home(),
-                    ),
-                  );
-                },
+                onPressed: _titleController.value.text.isNotEmpty
+                    ? () {
+                        addItem();
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Home(),
+                          ),
+                          (Route<dynamic> route) => false,
+                        );
+                      }
+                    : null,
                 child: Text(
                   "Submit",
                   style: TextStyle(
@@ -106,8 +110,10 @@ class _AddItemState extends State<AddItem> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<TodoItem> itemList = TodoItem.fromJSON(prefs.getString("List"));
     TodoItem item = TodoItem(
-        title: _titleController.text, description: _descriptionController.text);
-    itemList.add(item);
+        title: _titleController.text,
+        description: _descriptionController.text,
+        completed: false);
+    itemList.insert(0, item);
     String encodedData = TodoItem.toJSON(itemList);
     await prefs.setString("List", encodedData);
   }
